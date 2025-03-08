@@ -136,7 +136,7 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
                 <li>Only send USDT (BEP20) to this address</li>
                 <li>Minimum deposit amount is <strong>0.1 USDT</strong></li>
                 <li>Deposits below minimum amount cannot be refunded</li>
-                <li>Make sure you're on the correct network (BSC)</li>
+                <li>Make sure you&apos;re on the correct network (BSC)</li>
               </ul>
             </div>
           </div>
