@@ -21,10 +21,10 @@ const TABS = {
 type TabType = typeof TABS[keyof typeof TABS];
 
 export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
-  const [address, setAddress] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
-  const [copied, setCopied] = useState<boolean>(false);
+  const [error, setError]           = useState<string>('');
+  const [copied, setCopied]         = useState<boolean>(false);
+  const [address, setAddress]       = useState<string>('');
+  const [loading, setLoading]       = useState<boolean>(false);
   const [currentTab, setCurrentTab] = useState<TabType>(TABS.NULL);
 
   const renderUsdtLogo = () => {
