@@ -320,11 +320,48 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
       </>
     );
   };
-
-  const renderCurrentForm = () => {
+  
+  const renderTabButtons = () => {
     if (address === '') {
       return null;
     }
+    return (
+      < Row className="gx-2 mb-4" >
+        <Col xs={4}>
+          <Button
+            variant={currentTab === TABS.VIEW ? 'primary' : 'light'}
+            onClick={() => setCurrentTab(TABS.VIEW)}
+            disabled={loading}
+            className="w-100"
+          >
+            View Address
+          </Button>
+        </Col>
+        <Col xs={4}>
+          <Button
+            variant={currentTab === TABS.SEND ? 'primary' : 'light'}
+            onClick={() => setCurrentTab(TABS.SEND)}
+            disabled={loading}
+            className="w-100"
+          >
+            Send USDT
+          </Button>
+        </Col>
+        <Col xs={4}>
+          <Button
+            variant={currentTab === TABS.RECEIVE ? 'primary' : 'light'}
+            onClick={() => setCurrentTab(TABS.RECEIVE)}
+            disabled={loading}
+            className="w-100"
+          >
+            Receive USDT
+          </Button>
+        </Col>
+      </Row >
+    )
+  }
+
+  const renderCurrentForm = () => {
     switch (currentTab) {
       case TABS.VIEW:
         return viewUSDTAddress();
@@ -378,39 +415,9 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
           </div>
         </Form.Group>
 
-        {/* Create Address Button */}
-        <Row className="gx-2 mb-4">
-          <Col xs={4}>
-            <Button
-              variant={currentTab === TABS.VIEW ? 'primary' : 'light'}
-              onClick={() => setCurrentTab(TABS.VIEW)}
-              disabled={loading}
-              className="w-100"
-            >
-              View Address
-            </Button>
-          </Col>
-          <Col xs={4}>
-            <Button
-              variant={currentTab === TABS.SEND ? 'primary' : 'light'}
-              onClick={() => setCurrentTab(TABS.SEND)}
-              disabled={loading}
-              className="w-100"
-            >
-              Send USDT
-            </Button>
-          </Col>
-          <Col xs={4}>
-            <Button
-              variant={currentTab === TABS.RECEIVE ? 'primary' : 'light'}
-              onClick={() => setCurrentTab(TABS.RECEIVE)}
-              disabled={loading}
-              className="w-100"
-            >
-              Receive USDT
-            </Button>
-          </Col>
-        </Row>
+        {
+          renderTabButtons()
+        }
 
         {error && (
           <Alert variant="danger" className="mb-4">
