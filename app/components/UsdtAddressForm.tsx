@@ -15,6 +15,7 @@ const TABS = {
   VIEW: 'view',
   SEND: 'send',
   RECEIVE: 'receive',
+  NULL: 'null',
 } as const;
 
 type TabType = typeof TABS[keyof typeof TABS];
@@ -24,7 +25,7 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
-  const [currentTab, setCurrentTab] = useState<TabType>(TABS.VIEW);
+  const [currentTab, setCurrentTab] = useState<TabType>(TABS.NULL);
 
   const renderUsdtLogo = () => {
     return (
