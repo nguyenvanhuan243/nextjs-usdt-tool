@@ -1,0 +1,77 @@
+/* General Page Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6; /* Tailwind's bg-gray-100 */
+  }
+  
+  /* Container Styling */
+  .container {
+    width: 100%;
+    max-width: 480px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+  }
+  
+  /* Heading Styling */
+  h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #1f2937; /* Tailwind's text-gray-800 */
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form Card Styling */
+  .form-card {
+    background: #f9fafb; /* Tailwind's bg-gray-50 */
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .form-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* Button Styling */
+  button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #3b82f6; /* Tailwind's blue-500 */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #2563eb; /* Darker blue */
+  }
+  
+  /* Input Fields */
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db; /* Tailwind's border-gray-300 */
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #3b82f6; /* Blue focus */
+    box-shadow: 0px 0px 4px rgba(59, 130, 246, 0.5);
+  }
+  
+  /* Spacing */
+  .space-y-6 > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+  
