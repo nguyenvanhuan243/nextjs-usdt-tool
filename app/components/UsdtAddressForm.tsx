@@ -15,6 +15,17 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
   const [error, setError] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
 
+  const renderUsdtLogo = () => {
+    return (
+      <img
+        src="https://cryptologos.cc/logos/tether-usdt-logo.png"
+        alt="USDT"
+        width="32"
+        height="32"
+      />
+    );
+  };
+
   const handleCreateAddress = async () => {
     try {
       setLoading(true);
@@ -104,12 +115,7 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
                 />
                 <div className="position-absolute top-50 start-50 translate-middle">
                   <div className="bg-white rounded-circle p-2 shadow-sm">
-                    <img
-                      src="/usdt-logo.png"
-                      alt="USDT"
-                      width="32"
-                      height="32"
-                    />
+                    { renderUsdtLogo()}
                   </div>
                 </div>
               </div>

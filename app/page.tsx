@@ -12,10 +12,7 @@ export default function Home() {
         </Row>
         <Row className="justify-content-center">
           <Col xs={12} md={6} className="mb-4">
-            <UsdtAddressForm formTitle="User A Form" />
-          </Col>
-          <Col xs={12} md={6} className="mb-4">
-            <UsdtAddressForm formTitle="User B Form" />
+            <UsdtAddressForm formTitle="Your usdt address" />
           </Col>
         </Row>
       </Container>
