@@ -7,7 +7,7 @@ export default function Home() {
       <Container>
         <Row className="justify-content-center">
           <Col xs={12} className="text-center mb-4">
-            <h1 className="display-5 fw-bold text-primary">USDT Address Generator</h1>
+            <h1 className="display-5 fw-bold text-primary">USDT Blockchain Wallet BSC</h1>
           </Col>
         </Row>
         <Row className="justify-content-center">
