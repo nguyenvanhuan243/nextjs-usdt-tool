@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { QRCodeSVG } from 'qrcode.react';
+import { Card, Button, Form, Alert, Container, Row, Col } from 'react-bootstrap';
 
 interface UsdtAddressFormProps {
   formTitle: string;
@@ -12,12 +13,13 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
   const [address, setAddress] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [copied, setCopied] = useState<boolean>(false);
 
   const handleCreateAddress = async () => {
     try {
       setLoading(true);
       setError('');
-      const response = await axios.get('https://demo-wallet-exchange.fiotech.org/blockchain/getNewWallet');
+      const response = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/blockchain/getNewWallet`);
       setAddress(response.data.address);
     } catch (err) {
       setError('Failed to generate address. Please try again.');
@@ -27,38 +29,111 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
     }
   };
 
-  return (
-    <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-4">
-      <h2 className="text-xl font-bold text-center">{formTitle}</h2>
+  const handleCopyAddress = () => {
+    navigator.clipboard.writeText(address);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-      <div className="space-y-4">
-        <button
+  return (
+    <Card className="shadow-sm">
+      <Card.Header className="bg-primary text-white">
+        <h5 className="mb-0">{formTitle}</h5>
+      </Card.Header>
+      <Card.Body>
+        {/* Network Selection */}
+        <Form.Group className="mb-4">
+          <Form.Label>Network</Form.Label>
+          <div className="border rounded p-3">
+            <div className="d-flex justify-content-between align-items-center">
+              <div>
+                <strong>BSC</strong>
+                <span className="text-muted ms-2">BNB Smart Chain (BEP20)</span>
+              </div>
+              <i className="bi bi-chevron-down"></i>
+            </div>
+          </div>
+        </Form.Group>
+
+        {/* Create Address Button */}
+        <Button
+          variant="primary"
           onClick={handleCreateAddress}
           disabled={loading}
-          className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-blue-300 transition-colors"
+          className="w-100 mb-4"
         >
           {loading ? 'Generating...' : 'Create New USDT Address'}
-        </button>
+        </Button>
 
         {error && (
-          <div className="text-red-500 text-sm text-center">
+          <Alert variant="danger" className="mb-4">
             {error}
-          </div>
+          </Alert>
         )}
 
         {address && (
-          <div className="space-y-4">
-            <div className="text-center">
-              <p className="text-sm text-gray-600">Your USDT Address:</p>
-              <p className="text-sm font-mono break-all">{address}</p>
+          <>
+            {/* Address Display */}
+            <Form.Group className="mb-4">
+              <Form.Label>
+                Deposit Address <span className="text-danger">*</span>
+              </Form.Label>
+              <div className="border rounded p-3">
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="text-break">{address}</div>
+                  <Button
+                    variant="outline-primary"
+                    size="sm"
+                    onClick={handleCopyAddress}
+                    className="ms-2"
+                  >
+                    {copied ? 'Copied!' : 'Copy'}
+                  </Button>
+                </div>
+              </div>
+            </Form.Group>
+
+            {/* QR Code */}
+            <div className="text-center mb-4">
+              <div className="position-relative d-inline-block">
+                <QRCodeSVG
+                  value={address}
+                  size={192}
+                  level="L"
+                  includeMargin={false}
+                />
+                <div className="position-absolute top-50 start-50 translate-middle">
+                  <div className="bg-white rounded-circle p-2 shadow-sm">
+                    <img
+                      src="/usdt-logo.png"
+                      alt="USDT"
+                      width="32"
+                      height="32"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="flex justify-center">
-              <QRCodeSVG value={address} size={200} />
+            {/* Minimum Deposit */}
+            <div className="d-flex justify-content-between mb-4">
+              <span className="text-muted">Minimum Deposit</span>
+              <strong>0.1 USDT</strong>
             </div>
-          </div>
+
+            {/* Notice */}
+            <Alert variant="warning">
+              <strong>Notice</strong>
+              <ul className="mb-0 mt-2">
+                <li>
+                  Minimum deposit amount is <strong>0.1 USDT</strong>. Deposits below
+                  this amount will not be credited and cannot be refunded.
+                </li>
+              </ul>
+            </Alert>
+          </>
         )}
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   );
 } 
