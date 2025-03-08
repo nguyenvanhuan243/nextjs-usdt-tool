@@ -322,6 +322,9 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
   };
 
   const renderCurrentForm = () => {
+    if (address === '') {
+      return null;
+    }
     switch (currentTab) {
       case TABS.VIEW:
         return viewUSDTAddress();
