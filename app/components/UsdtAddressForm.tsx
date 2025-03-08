@@ -30,7 +30,7 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
     try {
       setLoading(true);
       setError('');
-      const response = await axios.get( `${process.env.NEXT_PUBLIC_API_URL}/blockchain/getNewWallet`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blockchain/getNewWallet`);
       setAddress(response.data.address);
     } catch (err) {
       setError('Failed to generate address. Please try again.');
@@ -115,7 +115,7 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
                 />
                 <div className="position-absolute top-50 start-50 translate-middle">
                   <div className="bg-white rounded-circle p-2 shadow-sm">
-                    { renderUsdtLogo()}
+                    {renderUsdtLogo()}
                   </div>
                 </div>
               </div>
