@@ -207,62 +207,118 @@ export default function UsdtAddressForm({ formTitle }: UsdtAddressFormProps) {
   const renderSendUSDTAddress = () => {
     return (
       <>
-        {/* Address Display */}
-        < Form.Group className="mb-4" >
-          <Form.Label>
-            Deposit Address <span className="text-danger">*</span>
-          </Form.Label>
+        {/* Available Balance */}
+        <Form.Group className="mb-4">
+          <Form.Label>Available Balance</Form.Label>
           <div className="border rounded p-3">
             <div className="d-flex justify-content-between align-items-center">
-              <div className="text-break">{address}</div>
-              <Button
-                variant="outline-primary"
-                size="sm"
-                onClick={handleCopyAddress}
-                className="ms-2"
-              >
-                {copied ? 'Copied!' : 'Copy'}
-              </Button>
-            </div>
-          </div>
-        </Form.Group >
-
-        {/* QR Code */}
-        < div className="text-center mb-4" >
-          <div className="position-relative d-inline-block">
-            <QRCodeSVG
-              value={address}
-              size={192}
-              level="L"
-              includeMargin={false}
-            />
-            <div className="position-absolute top-50 start-50 translate-middle">
-              <div className="bg-white rounded-circle p-2 shadow-sm">
+              <div>
+                <h3 className="mb-0">0.00 USDT</h3>
+                <small className="text-muted">≈ $0.00 USD</small>
+              </div>
+              <div className="bg-light rounded-circle p-2">
                 {renderUsdtLogo()}
               </div>
             </div>
           </div>
-        </div >
+        </Form.Group>
 
-        {/* Minimum Deposit */}
-        < div className="d-flex justify-content-between mb-4" >
-          <span className="text-muted">Minimum Deposit</span>
-          <strong>0.1 USDT</strong>
-        </div >
+        {/* Recipient Address */}
+        <Form.Group className="mb-4">
+          <Form.Label>
+            Recipient Address <span className="text-danger">*</span>
+          </Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter USDT (BEP20) address"
+            className="mb-2"
+          />
+          <Form.Text className="text-muted">
+            Make sure the address is on BSC (BNB Smart Chain) network
+          </Form.Text>
+        </Form.Group>
 
-        {/* Notice */}
-        < Alert variant="warning" >
-          <strong>Notice</strong>
-          <ul className="mb-0 mt-2">
-            <li>
-              Minimum deposit amount is <strong>0.1 USDT</strong>. Deposits below
-              this amount will not be credited and cannot be refunded.
-            </li>
-          </ul>
-        </Alert >
+        {/* Amount */}
+        <Form.Group className="mb-4">
+          <Form.Label>
+            Amount <span className="text-danger">*</span>
+          </Form.Label>
+          <div className="position-relative">
+            <Form.Control
+              type="number"
+              placeholder="0.00"
+              min="0.1"
+              step="0.1"
+            />
+            <div className="position-absolute top-50 end-0 translate-middle-y pe-3">
+              USDT
+            </div>
+          </div>
+          <div className="d-flex justify-content-between mt-2">
+            <Form.Text className="text-muted">
+              ≈ $0.00 USD
+            </Form.Text>
+            <Form.Text>
+              Available: 0.00 USDT
+            </Form.Text>
+          </div>
+        </Form.Group>
+
+        {/* Network Fee */}
+        <Form.Group className="mb-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <Form.Label className="mb-0">Network Fee</Form.Label>
+            <span className="text-muted">0.001 BNB</span>
+          </div>
+          <Form.Text className="text-muted d-block">
+            Transaction fee on BSC network
+          </Form.Text>
+        </Form.Group>
+
+        {/* Summary */}
+        <div className="border rounded p-3 mb-4">
+          <div className="d-flex justify-content-between mb-2">
+            <span className="text-muted">Amount</span>
+            <span>0.00 USDT</span>
+          </div>
+          <div className="d-flex justify-content-between mb-2">
+            <span className="text-muted">Network Fee</span>
+            <span>0.001 BNB</span>
+          </div>
+          <hr className="my-2" />
+          <div className="d-flex justify-content-between">
+            <span>Total</span>
+            <strong>0.00 USDT + 0.001 BNB</strong>
+          </div>
+        </div>
+
+        {/* Send Button */}
+        <Button
+          variant="primary"
+          className="w-100 mb-4"
+          disabled={true} // Enable when form is valid
+        >
+          Send USDT
+        </Button>
+
+        {/* Notices */}
+        <Alert variant="warning">
+          <div className="d-flex align-items-start">
+            <i className="bi bi-exclamation-triangle me-2"></i>
+            <div>
+              <strong>Important</strong>
+              <ul className="mb-0 mt-1 small">
+                <li>Minimum send amount is <strong>0.1 USDT</strong></li>
+                <li>Make sure the recipient address is correct</li>
+                <li>Transactions cannot be reversed</li>
+                <li>You need BNB in your wallet for network fees</li>
+              </ul>
+            </div>
+          </div>
+        </Alert>
       </>
     );
-  }
+  };
 
   const renderCurrentForm = () => {
     switch (currentTab) {
